@@ -1,0 +1,7 @@
+/node_modules
+.DS_Store
+/web/bundle.js
+.bash_history
+.ssh
+.viminfo
+/error_docs
