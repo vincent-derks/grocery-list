@@ -2,8 +2,9 @@ body { background: url('images/groceries.jpg') no-repeat; background-position: t
 
 .wrapper { display: flex; flex: 1; flex-direction: column; min-height: 100vh; }
 
-.groceryList { flex: 1; list-style: none; padding: 0; display: flex; flex-direction: column; }
-.groceryList li { overflow: hidden; display: flex; margin: 5px 0; background: #fff; align-items: center; padding: 4px; }
+.groceryList { flex: 1; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; }
+.groceryList li { overflow: hidden; display: flex; background: rgba(255,255,255,0.8); align-items: center; padding: 4px; }
+.groceryList li:nth-child(odd) { background: rgba(240,240,240,0.8); }
 .groceryList li input[type="checkbox"] { flex: 1; height: 18px; margin: 0; }
 .groceryList .text { flex: 4; display: flex; flex-direction: row; }
 .groceryList li button { flex: 1; }
