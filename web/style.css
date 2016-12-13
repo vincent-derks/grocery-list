@@ -1,4 +1,4 @@
-body { background: url('images/groceries.jpg') no-repeat; background-position: top center; background-size: 100%; background-attachment: fixed; }
+body { background: url('images/groceries.jpg') no-repeat #fff; background-position: top center; background-size: 100%; background-attachment: fixed; }
 
 .wrapper { display: flex; flex: 1; flex-direction: column; min-height: 100vh; }
 
