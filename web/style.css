@@ -17,7 +17,6 @@ header h1 { font-size: 2rem; margin: 0; margin-left: 40px; }
 .addGrocery input[type="number"] { flex: 1; margin-right: 10px; }
 .addGrocery button { flex: 2; }
 
-
 /**** REACT CSS TRANSITIONS ****/
 .listItem-enter { opacity: 0.01; transform: scale(0); }
 .listItem-enter.listItem-enter-active { opacity: 1; transform: scale(1); transition: all 0.2s ease-in-out; }
