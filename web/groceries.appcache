@@ -1,9 +1,10 @@
 CACHE MANIFEST
 
-# Version 1.0
+# Version 1.1
 
 NETWORK:
 *
 
 CACHE:
 index.html
+style.css
