@@ -1,15 +1,25 @@
-body { background: url('images/groceries.jpg') no-repeat #fff; background-position: top center; background-size: 100%; background-attachment: fixed; }
+body { background: #fff; }
 
 .wrapper { display: flex; flex: 1; flex-direction: column; min-height: 100vh; }
 
-.groceryList { flex: 1; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; }
+header { flex-shrink: 1; background-image: url('images/groceries-logo.png'); background-repeat: no-repeat; background-position: 10px center; background-size: 30px; padding: 15px; align-items: center; }
+header h1 { font-size: 2rem; margin: 0; margin-left: 40px; }
+
+.groceryList { flex: 5; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; background: url('images/groceries.jpg') no-repeat #fff; background-position: top; background-size: 100%; }
 .groceryList li { overflow: hidden; display: flex; background: rgba(255,255,255,0.8); align-items: center; padding: 4px; }
 .groceryList li:nth-child(odd) { background: rgba(240,240,240,0.8); }
 .groceryList li input[type="checkbox"] { flex: 1; height: 18px; margin: 0; }
 .groceryList .text { flex: 4; display: flex; flex-direction: row; }
 .groceryList li button { flex: 1; }
 
-.addGrocery { position: fixed; bottom: 0px; padding: 20px; display: flex; background: rgba(255,255,255,0.8) }
-.addGrocery input[type="text"] { flex: 6; }
-.addGrocery input[type="number"] { flex: 1; }
+.addGrocery { position: fixed; bottom: 0px; align-content: space-between; padding: 15px; display: flex; background: rgba(0,0,0,0.8) }
+.addGrocery input[type="text"] { flex: 6; margin-right: 10px; }
+.addGrocery input[type="number"] { flex: 1; margin-right: 10px; }
 .addGrocery button { flex: 2; }
+
+
+/**** REACT CSS TRANSITIONS ****/
+.listItem-enter { opacity: 0.01; transform: scale(0); }
+.listItem-enter.listItem-enter-active { opacity: 1; transform: scale(1); transition: all 0.2s ease-in-out; }
+.listItem-leave { opacity: 1; transform: scale(1); }
+.listItem-leave.listItem-leave-active { opacity: 0.01; transform: scale(0); transform-origin: top; transition: all 0.2s ease-in-out; }

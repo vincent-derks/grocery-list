@@ -20,8 +20,10 @@ class App extends Component {
     }
     render(){
         return(
-            <div className="wrapper text-center">
-                <h1>Epic groceries</h1>
+            <div className="wrapper">
+                <header>
+                    <h1>Epic groceries</h1>
+                </header>
                 <ListGroceries />
                 <AddGrocery />
             </div>
