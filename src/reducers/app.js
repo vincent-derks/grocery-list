@@ -1,5 +1,5 @@
 const initialState = {
-    menuOpen: false,
+    menuOpen: false
 }
 
 const appReducer = (state = initialState, action) => {

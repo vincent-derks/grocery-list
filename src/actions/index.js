@@ -13,13 +13,28 @@ firebase.initializeApp(config)
 let Groceries = firebase.database().ref('groceries')
 window.Groceries = Groceries
 
-export function loadGroceries(){
+export function loadGroceries(state){
     return (dispatch) => {
         Groceries.on('value', snapshot => {
-            dispatch({
-                type: 'LOAD_GROCERIES',
-                data: snapshot.val()
-            })
+            if(snapshot.val()){
+                const groceries = Object.keys(snapshot.val()).map((key, index)=>{
+                    return {
+                        ...snapshot.val()[key],
+                        id: key
+                    }
+                }).filter((item)=>{
+                    return true
+                })
+                dispatch({
+                    type: 'LOAD_GROCERIES',
+                    data: groceries
+                })
+            } else {
+                dispatch({
+                    type: 'LOAD_GROCERIES',
+                    data: []
+                })
+            }
         })
     }
 }
@@ -27,6 +42,13 @@ export function loadGroceries(){
 export function toggleMenu(){
     return {
         type: 'APP_TOGGLE_MENU'
+    }
+}
+
+export function changeFilter(filter){
+    return {
+        type: 'CHANGE_FILTER',
+        data: filter
     }
 }
 

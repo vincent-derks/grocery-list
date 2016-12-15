@@ -1,5 +1,6 @@
 const initialState = {
-    groceries: []
+    groceries: [],
+    filter: null
 }
 
 const contentReducer = (state = initialState, action) => {
@@ -8,6 +9,11 @@ const contentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 groceries: action.data
+            }
+        case 'CHANGE_FILTER':
+            return {
+                ...state,
+                filter: action.data
             }
         default:
             return state

@@ -15,18 +15,28 @@ class ListGroceries extends Component {
     }
 
     render(){
-        const { groceries } = this.props
+        const { groceries, filter } = this.props
         if(groceries){
+            const filteredGroceries = groceries.filter( item => {
+                if(filter === null){
+                    return true
+                } else if (filter === 'open'){
+                    return !item.done
+                } else if (filter === 'closed'){
+                    return item.done
+                } else {
+                    return true
+                }
+            })
             return(
                 <ul className="groceryList">
                     <ReactCSSTransitionGroup transitionName="listItem" transitionEnterTimeout={200} transitionLeaveTimeout={200} >
-                    {Object.keys(groceries).map((key, index)=>{
-                        const item = groceries[key]
+                    {filteredGroceries.map((item)=>{
                         return (
-                            <li key={key}>
-                                <input type="checkbox" checked={item.done} onChange={this.toggleGroceryStatus.bind(this, key)}/>
+                            <li key={item.id}>
+                                <input type="checkbox" checked={item.done} onChange={this.toggleGroceryStatus.bind(this, item.id)}/>
                                 <div className="text">{item.value} ({item.amount}x)</div>
-                                <button className="btn btn-danger" onClick={this.removeGrocery.bind(this, key)}>Remove</button>
+                                <button className="btn btn-danger" onClick={this.removeGrocery.bind(this, item.id)}>Remove</button>
                             </li>
                         )
                     })}
@@ -42,6 +52,7 @@ class ListGroceries extends Component {
 
 export default connect(
     state => ({
-        groceries: state.contentReducer.groceries
+        groceries: state.contentReducer.groceries,
+        filter: state.contentReducer.filter
     })
 )(ListGroceries)

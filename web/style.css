@@ -2,8 +2,10 @@ body { background: #fff; }
 
 .wrapper { display: flex; flex: 1; flex-direction: column; min-height: 100vh; }
 
-header { flex-shrink: 1; background-image: url('images/groceries-logo.png'); background-repeat: no-repeat; background-position: 10px center; background-size: 30px; padding: 15px; align-items: center; }
-header h1 { font-size: 2rem; margin: 0; margin-left: 40px; }
+header { flex-shrink: 1; display: flex; background-image: url('images/groceries-logo.png'); background-repeat: no-repeat; background-position: 10px center; background-size: 30px; padding: 15px; align-items: center; }
+header h1 { font-size: 2rem; flex: 4; margin: 0; margin-left: 30px; }
+header .filters button.active.btn:active,
+header .filters button.active.btn:focus { -webkit-tap-highlight-color: #fff; outline: 0; }
 
 .groceryList { flex: 5; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; background: url('images/groceries.jpg') no-repeat #fff; background-position: top; background-size: 100%; }
 .groceryList li { overflow: hidden; display: flex; background: rgba(255,255,255,0.8); align-items: center; padding: 4px; }

@@ -4,6 +4,7 @@ import * as Actions from './../actions'
 
 import ListGroceries from './listgroceries'
 import AddGrocery from './addgrocery'
+import ChangeFilter from './changefilter'
 
 class App extends Component {
     componentWillMount(){
@@ -23,6 +24,7 @@ class App extends Component {
             <div className="wrapper">
                 <header>
                     <h1>Epic groceries</h1>
+                    <ChangeFilter />
                 </header>
                 <ListGroceries />
                 <AddGrocery />
