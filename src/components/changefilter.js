@@ -14,12 +14,16 @@ class ChangeFilter extends Component {
         event.target.classList.add('active')
     }
 
+    isActive(button){
+        return button == this.props.filter ? 'active' : ''
+    }
+
     render(){
         return(
             <div className="filters btn-group btn-group-sm" role="group">
-                <button type="button" className="btn btn-default active" value="" onClick={this.changeFilter.bind(this)}>All</button>
-                <button type="button" className="btn btn-default" value="open" onClick={this.changeFilter.bind(this)}>Open</button>
-                <button type="button" className="btn btn-default" value="closed" onClick={this.changeFilter.bind(this)}>Closed</button>
+                <button type="button" className={'btn btn-default all '+this.isActive(undefined)} value="" onClick={this.changeFilter.bind(this)}>All</button>
+                <button type="button" className={'btn btn-default open '+this.isActive('open')} value="open" onClick={this.changeFilter.bind(this)}>Open</button>
+                <button type="button" className={'btn btn-default closed '+this.isActive('closed')} value="closed" onClick={this.changeFilter.bind(this)}>Closed</button>
             </div>
         )
     }

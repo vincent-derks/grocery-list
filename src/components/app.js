@@ -23,7 +23,7 @@ class App extends Component {
         return(
             <div className="wrapper">
                 <header>
-                    <h1>Epic groceries</h1>
+                    <h1>Groceries</h1>
                     <ChangeFilter />
                 </header>
                 <ListGroceries />
