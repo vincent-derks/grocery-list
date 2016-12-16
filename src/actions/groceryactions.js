@@ -17,7 +17,9 @@ export function getLists(){
                             return true
                         }
                     }
-                    return item.owner === getState().appReducer.user.uid
+                    if(getState().appReducer.user){
+                        return item.owner === getState().appReducer.user.uid
+                    }
                 })
                 dispatch({
                     type: 'LOAD_LISTS',

@@ -28,7 +28,7 @@ const appReducer = (state = initialState, action) => {
             let User = state.firebase.auth().currentUser
             return {
                 ...state,
-                user: User
+                user: action.data
             }
         default:
             return newState

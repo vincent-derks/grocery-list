@@ -5,13 +5,11 @@ export function signInWithEmailAndPassword(email, password){
         const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
             // Check if user is logged in, then set user email, otherwise set user in Redux to null
             if(firebaseUser){
-                unsubscribe()
                 dispatch({
                     type: 'USER_CHANGED',
                     data: firebaseUser
                 })
             } else {
-                unsubscribe()
                 dispatch({
                     type: 'USER_CHANGED',
                     data: null
