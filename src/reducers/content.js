@@ -1,14 +1,24 @@
 const initialState = {
-    groceries: [],
+    groceryLists: [],
+    singleList: [],
     filter: null
 }
 
 const contentReducer = (state = initialState, action) => {
     switch(action.type){
-        case 'LOAD_GROCERIES':
+        case 'LOAD_LISTS':
             return {
                 ...state,
-                groceries: action.data
+                groceryLists: action.data
+            }
+        case 'GET_LIST':
+            return {
+                ...state,
+                singleList:  {
+                    ...state.singleList,
+                    list: action.data.list,
+                    id: action.data.id
+                }
             }
         case 'CHANGE_FILTER':
             return {

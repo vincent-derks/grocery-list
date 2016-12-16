@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as Actions from './../actions'
+import * as Actions from './../actions/groceryactions'
 
 class ChangeFilter extends Component {
 
@@ -31,6 +31,6 @@ class ChangeFilter extends Component {
 
 export default connect(
     state => ({
-        filter: state.filter
+        filter: state.contentReducer.filter
     })
 )(ChangeFilter)

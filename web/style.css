@@ -2,22 +2,43 @@ body { background: #fff; }
 
 .wrapper { display: flex; flex: 1; flex-direction: column; min-height: 100vh; }
 
-header { flex-shrink: 1; display: flex; background-image: url('images/groceries-logo.png'); background-repeat: no-repeat; background-position: 10px center; background-size: 30px; padding: 15px; align-items: center; }
-header h1 { font-size: 2rem; flex: 4; margin: 0; margin-left: 30px; }
+header { flex-shrink: 1; height: 46px; display: flex; padding: 15px; align-items: center; border-bottom: 1px solid #ccc; }
+header h1 { font-size: 2rem; flex: 4; margin: 0; margin-left: 30px; font-weight: 400; }
 header .filters button.active.btn:active,
 header .filters button.active.btn:focus { -webkit-tap-highlight-color: #fff; outline: 0; }
 
-.groceryList { flex: 5; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; background: url('images/groceries.jpg') no-repeat #fff; background-position: top; background-size: 100%; }
+.groceryList,
+.pageContentWrapper,
+.listsDisplay { flex: 5; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; background: url('images/groceries.jpg') no-repeat #fff; background-position: top; background-size: 100%; }
+.pageContentWrapper { padding: 10px; }
+
+.listsDisplay { list-style: none; padding: 0; display: flex; flex-direction: column; margin-bottom: 0; }
+.listsDisplay li { display: flex; align-items: center; padding: 5px 5px 5px 20px; background: rgba(255,255,255,0.8); border-bottom: 1px solid #ddd; flex: 1; }
+.listsDisplay li:nth-child(odd) { background: rgba(240,240,240,0.8); }
+.listsDisplay li a { flex: 1; }
+.listsDisplay li button { align-self: flex-end; margin-left: 10px; }
+
+.addList { margin: 20px 10px; }
+
+.groceryListWrapper { display: flex; flex: 5; flex-shrink: 5; }
+
+.form-inline .form-control { display: inline-block; width: auto; vertical-align: middle; }
+
 .groceryList li { overflow: hidden; display: flex; background: rgba(255,255,255,0.8); align-items: center; padding: 4px; }
 .groceryList li:nth-child(odd) { background: rgba(240,240,240,0.8); }
 .groceryList li input[type="checkbox"] { flex: 1; height: 18px; margin: 0; }
 .groceryList .text { flex: 4; display: flex; flex-direction: row; }
 .groceryList li button { flex: 1; }
 
-.addGrocery { position: fixed; bottom: 0px; align-content: space-between; padding: 15px; display: flex; background: rgba(0,0,0,0.8) }
+.addGrocery { position: fixed; bottom: 0px; width: 100%; align-content: space-between; padding: 15px; display: flex; background: rgba(0,0,0,0.8) }
 .addGrocery input[type="text"] { flex: 6; margin-right: 10px; }
 .addGrocery input[type="number"] { flex: 1; margin-right: 10px; }
 .addGrocery button { flex: 2; }
+
+.searchUser .form-inline .input-group { display: flex; flex: 1; }
+.searchUser .form-inline .input-group input { flex: 1; }
+
+.showUser { background: rgba(255,255,255,0.8); padding: 20px; margin-top: 20px; border: 1px solid #ccc; }
 
 /**** REACT CSS TRANSITIONS ****/
 .listItem-enter { opacity: 0.01; transform: scale(0); }

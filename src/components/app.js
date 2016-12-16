@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import * as Actions from './../actions'
 
-import ListGroceries from './listgroceries'
 import AddGrocery from './addgrocery'
 import ChangeFilter from './changefilter'
+import Header from './header'
 
 class App extends Component {
     componentWillMount(){
@@ -22,12 +22,8 @@ class App extends Component {
     render(){
         return(
             <div className="wrapper">
-                <header>
-                    <h1>Groceries</h1>
-                    <ChangeFilter />
-                </header>
-                <ListGroceries />
-                <AddGrocery />
+                <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
+                {this.props.children}
             </div>
         )
     }

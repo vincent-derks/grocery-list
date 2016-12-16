@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as Actions from './../actions'
+import * as Actions from './../actions/groceryactions'
 
 class AddGrocery extends Component {
 
@@ -8,7 +8,7 @@ class AddGrocery extends Component {
         event.preventDefault()
         const value = this.refs.groceryInput.value
         const amount = this.refs.groceryNumberInput.value
-        Actions.addGrocery(value, amount)
+        this.props.dispatch(Actions.addGrocery(value, amount))
         this.refs.groceryInput.value = ''
     }
 

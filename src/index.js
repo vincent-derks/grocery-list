@@ -3,10 +3,15 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
-import _ from 'lodash'
+import { Router, Route, Link, browserHistory, IndexRoute } from 'react-router'
 
 // Components
 import App from './components/app'
+import Login from './components/login'
+import ViewLists from './components/viewlists'
+import List from './components/list'
+import ShareList from './components/sharelist'
+
 // Main reducer
 import rootReducer from './reducers'
 
@@ -15,6 +20,13 @@ let store = createStore(rootReducer, window.devToolsExtension && window.devTools
 
 ReactDOM.render((
     <Provider store={store}>
-        <App />
+        <Router history={browserHistory}>
+            <Route path="/" component={App}>
+                <IndexRoute component={Login}></IndexRoute>
+                <Route path="/lists" component={ViewLists}></Route>
+                <Route path="/list/:list" component={List}></Route>
+                <Route path="/share/:listId" component={ShareList}></Route>
+            </Route>
+        </Router>
     </Provider>
 ), document.getElementById('app'))
