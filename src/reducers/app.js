@@ -13,7 +13,10 @@ const Ref = firebase.initializeApp(config)
 const initialState = {
     menuOpen: false,
     firebase: Ref,
-    user: null
+    user: null,
+    showCreateAccount: false,
+    forgotPasswordEmailInput: false,
+    forgotPasswordEmailSend: false
 }
 
 const appReducer = (state = initialState, action) => {
@@ -21,14 +24,30 @@ const appReducer = (state = initialState, action) => {
     switch(action.type){
         case 'APP_TOGGLE_MENU':
             return {
-                ...state,
-                menuOpen: !state.menuOpen
+                ...newState,
+                menuOpen: !newState.menuOpen
             }
         case 'USER_CHANGED':
-            let User = state.firebase.auth().currentUser
+            let User = newState.firebase.auth().currentUser
             return {
-                ...state,
+                ...newState,
                 user: action.data
+            }
+        case 'TOGGLE_CREATE_ACCOUNT':
+            return {
+                ...newState,
+                showCreateAccount: !newState.showCreateAccount
+            }
+        case 'TOGGLE_SHOW_FORGOT_PASSWORD_EMAIL_INPUT':
+            return {
+                ...newState,
+                forgotPasswordEmailInput: !newState.forgotPasswordEmailInput
+            }
+        case 'TOGGLE_SEND_PASSWORD_RESET_EMAIL':
+            return {
+                ...newState,
+                forgotPasswordEmailSend: !newState.forgotPasswordEmailSend,
+                forgotPasswordEmailInput: false
             }
         default:
             return newState

@@ -1,5 +1,6 @@
 const initialState = {
-    foundUser: undefined
+    foundUser: undefined,
+    sharing: false
 }
 
 const shareReducer = (state = initialState, action) => {
@@ -12,7 +13,13 @@ const shareReducer = (state = initialState, action) => {
         case 'LIST_SHARED':
             return {
                 ...state,
-                foundUser: undefined
+                sharing: true
+            }
+        case 'CLOSE_SHARER':
+            return {
+                ...state,
+                foundUser: undefined,
+                sharing: false
             }
         default:
             return state

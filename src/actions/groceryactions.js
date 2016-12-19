@@ -47,10 +47,18 @@ export function addGroceryList(name){
     }
 }
 
-export function removeList(key){
+export function removeList(key){5
     return (dispatch, getState) => {
         let dbref = getState().appReducer.firebase.database()
-        dbref.ref('groceryLists').child(key).remove()
+        const list = getState().contentReducer.groceryLists.filter( item => {
+            return item.id == key
+        })[0]
+        const user = getState().appReducer.user.uid
+        if(list.owner == user){
+            dbref.ref('groceryLists').child(key).remove()
+        } else {
+            dbref.ref('groceryLists').child(key).child('sharedUser').child(user).remove()
+        }
     }
 }
 

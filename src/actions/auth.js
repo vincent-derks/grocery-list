@@ -1,10 +1,12 @@
+import { browserHistory } from 'react-router'
+
 export function signInWithEmailAndPassword(email, password){
     return (dispatch, getState) => {
         const auth = getState().appReducer.firebase.auth()
         auth.signInWithEmailAndPassword(email, password)
         const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
             // Check if user is logged in, then set user email, otherwise set user in Redux to null
-            console.log('auth state changed')
+            console.log(firebaseUser)
             if(firebaseUser){
                 dispatch({
                     type: 'USER_CHANGED',
@@ -34,7 +36,7 @@ export function createUserWithEmailAndPassword(name, email, password){
             .then(() => {
                 dispatch({
                     type: 'USER_CHANGED',
-                    data: action.data
+                    data: user
                 })
             })
         })
@@ -42,6 +44,7 @@ export function createUserWithEmailAndPassword(name, email, password){
 }
 
 export function setUser(user){
+    console.log(user)
     return {
         type: 'USER_CHANGED',
         data: user
@@ -70,6 +73,11 @@ export function shareList(user, list){
                 dispatch({
                     type: 'LIST_SHARED'
                 })
+                setTimeout(()=>{
+                    dispatch({
+                        type: 'CLOSE_SHARER'
+                    }, 2000)
+                })
             } else {
                 console.log('already shared with this user!')
             }
@@ -80,5 +88,43 @@ export function shareList(user, list){
             })
         }
 
+    }
+}
+
+export function toggleCreateAccount(){
+    return {
+        type: 'TOGGLE_CREATE_ACCOUNT'
+    }
+}
+
+export function toggleShowForgotPasswordEmailInput(){
+    return {
+        type: 'TOGGLE_SHOW_FORGOT_PASSWORD_EMAIL_INPUT'
+    }
+}
+
+export function sendForgotPasswordEmail(email){
+    return (dispatch, getState) => {
+        const auth = getState().appReducer.firebase.auth()
+        const sendMail = auth.sendPasswordResetEmail(email)
+        sendMail.then(() => {
+            dispatch({
+                type: 'TOGGLE_SEND_PASSWORD_RESET_EMAIL'
+            })
+        })
+    }
+}
+
+export function logout(){
+    return (dispatch, getState) => {
+        const auth = getState().appReducer.firebase.auth()
+        const signOut = auth.signOut()
+        signOut.then(()=>{
+            dispatch({
+                type: 'USER_CHANGED',
+                data: null
+            })
+            browserHistory.push('/')
+        })
     }
 }
