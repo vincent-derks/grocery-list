@@ -22,7 +22,7 @@ const initialState = {
 const appReducer = (state = initialState, action) => {
     let newState = {...state}
     switch(action.type){
-        case 'APP_TOGGLE_MENU':
+        case 'TOGGLE_MENU':
             return {
                 ...newState,
                 menuOpen: !newState.menuOpen

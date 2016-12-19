@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { Link, browserHistory } from 'react-router'
-import ChangeFilter from './changefilter'
 import { connect } from 'react-redux'
-import * as AuthActions from './../actions/auth'
+import * as AppActions from './../actions/app'
+
+import ChangeFilter from './changefilter'
+import Menu from './menu'
 
 class Header extends Component {
 
-    handleLogout(event){
+    toggleMenu(event){
         event.preventDefault()
-        this.props.dispatch(AuthActions.logout())
+        this.props.dispatch(AppActions.toggleMenu())
     }
 
     getPageTitle(){
@@ -20,6 +22,8 @@ class Header extends Component {
                 return list
             case page.indexOf('/share') >= 0:
                 return 'Share your list'
+            case page == '/profile':
+                return 'Your profile'
             default:
                 return 'Groceries'
         }
@@ -31,11 +35,22 @@ class Header extends Component {
                 {this.props.list ? <Link to="/lists"><i className="fa fa-chevron-left" aria-hidden="true"></i></Link> : ''}
                 {this.props.share ? <a onClick={browserHistory.goBack}><i className="fa fa-chevron-left" aria-hidden="true"></i></a> : ''}
                 <h1>{this.getPageTitle()}</h1>
-                {this.props.page == '/lists' && <button className="btn btn-danger pull-right" onClick={this.handleLogout.bind(this)}><i className="fa fa-sign-out" aria-hidden="true"></i> Logout</button>}
                 {this.props.list ? <ChangeFilter /> : ''}
+                {this.props.user &&
+                    <a className="toggleMenu" onClick={this.toggleMenu.bind(this)}>
+                        {!this.props.menuOpen && <i className="fa fa-bars" aria-hidden="true"></i>}
+                        {this.props.menuOpen && <i className="fa fa-times" aria-hidden="true"></i>}
+                    </a>
+                }
+                {this.props.user && <Menu />}
             </header>
         )
     }
 }
 
-export default connect()(Header)
+export default connect(
+    state => ({
+        user: state.appReducer.user,
+        menuOpen: state.appReducer.menuOpen
+    })
+)(Header)

@@ -29,8 +29,4 @@ class App extends Component {
     }
 }
 
-export default connect(
-    state => ({
-        groceries: state.groceries
-    })
-)(App)
+export default connect()(App)

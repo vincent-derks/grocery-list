@@ -11,6 +11,7 @@ import Login from './components/login'
 import ViewLists from './components/viewlists'
 import List from './components/list'
 import ShareList from './components/sharelist'
+import Profile from './components/profile'
 
 // Main reducer
 import rootReducer from './reducers'
@@ -26,6 +27,7 @@ ReactDOM.render((
                 <Route path="/lists" component={ViewLists}></Route>
                 <Route path="/list/:list" component={List}></Route>
                 <Route path="/share/:listId" component={ShareList}></Route>
+                <Route path="/profile" component={Profile}></Route>
             </Route>
         </Router>
     </Provider>

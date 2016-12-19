@@ -7,6 +7,16 @@ header h1 { font-size: 2rem; flex: 4; margin: 0; margin-left: 30px; font-weight:
 header .filters button.active.btn:active,
 header .filters button.active.btn:focus { -webkit-tap-highlight-color: #fff; outline: 0; }
 
+.toggleMenu { z-index: 999; color: #000; font-size: 2rem; margin-left: 20px; }
+.toggleMenu:active,
+.toggleMenu:focus { color: #000; }
+
+.menu { transition: all 0.2s ease-in-out; position: fixed; top: 0px; left: 0px; background: #fff; right: 0px; height: 100vh; width: 100vw; z-index: 99; list-style: none; padding: 0; }
+.menu.closed { transform: translateX(-100vw); opacity: 0; }
+.menu.open { transform: translateX(0); opacity: 1; }
+.menu li a { padding: 10px; border-bottom: 1px solid #ddd; display: block; }
+.menu li:first-child { padding: 10px; border-bottom: 1px solid #ddd; }
+
 .groceryList,
 .pageContentWrapper,
 .listsDisplay { flex: 5; list-style: none; padding: 0; margin-bottom: 75px; display: flex; flex-direction: column; background: url('images/groceries.jpg') no-repeat #fff; background-position: top; background-size: 100%; }
