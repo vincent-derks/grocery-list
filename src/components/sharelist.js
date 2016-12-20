@@ -36,6 +36,10 @@ class ShareList extends Component {
         this.props.dispatch(ContentActions.getLists())
     }
 
+    componentWillUnmount(){
+        this.props.dispatch(AuthActions.resetUserFound())
+    }
+
     render(){
         return(
             <div className="pageContentWrapper searchUser">
@@ -49,6 +53,7 @@ class ShareList extends Component {
                     </div>
                 </form>
                 {this.props.foundUser && <ShowFoundUser user={this.props.foundUser} shareList={this.shareList} listId={this.props.params.listId} />}
+                {this.props.foundUser === false && <span>Sorry, no matching user found by this email, please try again</span>}
             </div>
         )
     }

@@ -1,6 +1,7 @@
 /node_modules
 .DS_Store
-/web/bundle.js
+/web/bundle_*.js
+/web/index.html
 .bash_history
 .ssh
 .viminfo

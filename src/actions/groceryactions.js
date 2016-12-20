@@ -2,6 +2,10 @@ import slug from 'slug'
 
 export function getLists(){
     return (dispatch, getState) => {
+        dispatch({
+            type: 'LOADING_LISTS',
+            data: true
+        })
         let dbref = getState().appReducer.firebase.database()
         let lists = dbref.ref('groceryLists')
         lists.on('value', snapshot => {
@@ -25,10 +29,18 @@ export function getLists(){
                     type: 'LOAD_LISTS',
                     data: lists
                 })
+                dispatch({
+                    type: 'LOADING_LISTS',
+                    data: false
+                })
             } else {
                 dispatch({
                     type: 'LOAD_LISTS',
                     data: []
+                })
+                dispatch({
+                    type: 'LOADING_LISTS',
+                    data: false
                 })
             }
         })

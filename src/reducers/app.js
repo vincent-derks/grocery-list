@@ -12,8 +12,9 @@ const Ref = firebase.initializeApp(config)
 
 const initialState = {
     menuOpen: false,
+    onlineStatus: true,
     firebase: Ref,
-    user: null,
+    user: undefined,
     showCreateAccount: false,
     forgotPasswordEmailInput: false,
     forgotPasswordEmailSend: false
@@ -27,8 +28,11 @@ const appReducer = (state = initialState, action) => {
                 ...newState,
                 menuOpen: !newState.menuOpen
             }
+        case 'TOGGLE_ONLINE_STATUS':
+            return {
+                onlineStatus: action.data
+            }
         case 'USER_CHANGED':
-            let User = newState.firebase.auth().currentUser
             return {
                 ...newState,
                 user: action.data

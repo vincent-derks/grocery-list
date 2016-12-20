@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import * as Actions from './../actions'
+import { browserHistory } from 'react-router'
+import * as GroceryActions from './../actions/groceryactions'
+import * as AuthActions from './../actions/auth'
 
 import AddGrocery from './addgrocery'
 import ChangeFilter from './changefilter'
@@ -16,17 +18,39 @@ class App extends Component {
             preloader.parentNode.removeChild(preloader)
         }, 500)
 
-        // Load the groceries
-        this.props.dispatch(Actions.loadGroceries())
+        if(!this.props.user){
+            browserHistory.push('/')
+        }
+        this.props.firebase.auth().onAuthStateChanged(firebaseUser => {
+            if(firebaseUser){
+                this.props.dispatch(GroceryActions.getLists())
+            }
+            this.props.dispatch(AuthActions.setUser(firebaseUser))
+        })
+
     }
     render(){
-        return(
-            <div className="wrapper">
-                <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
-                {this.props.children}
-            </div>
-        )
+        if(this.props.user === undefined){
+            return (
+                <div className="wrapper">
+                    <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
+                    <span style={{ 'color' : 'rgba(0,0,0,0.4)'}}>Loading user data...</span>
+                </div>
+            )
+        } else {
+            return (
+                <div className="wrapper">
+                    <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
+                    {this.props.children}
+                </div>
+            )
+        }
     }
 }
 
-export default connect()(App)
+export default connect(
+    state => ({
+        firebase: state.appReducer.firebase,
+        user: state.appReducer.user
+    })
+)(App)

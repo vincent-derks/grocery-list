@@ -1,3 +1,5 @@
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
 const prod = process.argv.indexOf('-p') !== -1;
 
 if(prod){
@@ -43,6 +45,10 @@ if(prod){
                 warnings: true
               }
             }),
+            new HtmlWebpackPlugin({
+                title: 'Grocery app!',
+                template: 'src/index_html.ejs'
+            })
         ]
     }
 
@@ -52,7 +58,7 @@ if(prod){
         entry: './src/index.js',
         output: {
             path: './web/',
-            filename: 'bundle.js'
+            filename: 'bundle_[hash].js'
         },
         module: {
             loaders: [
@@ -75,7 +81,13 @@ if(prod){
                 }
             ],
 
-        }
+        },
+        plugins: [
+            new HtmlWebpackPlugin({
+                title: 'Grocery app!',
+                template: 'src/index_html.ejs'
+            })
+        ]
     }
 
 }

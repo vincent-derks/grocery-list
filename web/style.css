@@ -6,6 +6,7 @@ header { flex-shrink: 1; height: 46px; display: flex; padding: 15px; margin-top:
 header h1 { font-size: 2rem; flex: 4; margin: 0; margin-left: 30px; font-weight: 400; }
 header .filters button.active.btn:active,
 header .filters button.active.btn:focus { -webkit-tap-highlight-color: #fff; outline: 0; }
+header .offline { position: fixed; background: rgba(255,0,0,0.8); color: rgba(255,255,255,0.8); top: 0; left: 0; right: 0; padding: 5px; text-align: center; z-index: 99999; }
 
 .toggleMenu { z-index: 999; color: #000; font-size: 2rem; margin-left: 20px; }
 .toggleMenu:active,
@@ -29,6 +30,9 @@ header .filters button.active.btn:focus { -webkit-tap-highlight-color: #fff; out
 .listsDisplay li button { align-self: flex-end; margin-left: 10px; }
 
 .addList { margin: 20px 10px; }
+.addList .input-group { display: flex; flex: 1; }
+.addList .input-group * { display: block; width: auto; flex: 1; line-height: 2rem; }
+.addList input[type="text"] { min-width: 50px; flex: 2; }
 
 .groceryListWrapper { display: flex; flex: 5; flex-shrink: 5; }
 

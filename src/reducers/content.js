@@ -1,7 +1,8 @@
 const initialState = {
     groceryLists: [],
     singleList: [],
-    filter: null
+    filter: null,
+    loadingLists: false
 }
 
 const contentReducer = (state = initialState, action) => {
@@ -10,6 +11,11 @@ const contentReducer = (state = initialState, action) => {
             return {
                 ...state,
                 groceryLists: action.data
+            }
+        case 'LOADING_LISTS':
+            return {
+                ...state,
+                loadingLists: action.data
             }
         case 'GET_LIST':
             return {

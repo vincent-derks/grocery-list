@@ -32,6 +32,7 @@ class Header extends Component {
     render(){
         return(
             <header>
+                {this.props.onlineStatus && <span className="offline"><i className="fa fa-exclamation-triangle" aria-hidden="true"></i> Warning, there is no working internet connection available</span>}
                 {this.props.list ? <Link to="/lists"><i className="fa fa-chevron-left" aria-hidden="true"></i></Link> : ''}
                 {this.props.share ? <a onClick={browserHistory.goBack}><i className="fa fa-chevron-left" aria-hidden="true"></i></a> : ''}
                 <h1>{this.getPageTitle()}</h1>
@@ -51,6 +52,7 @@ class Header extends Component {
 export default connect(
     state => ({
         user: state.appReducer.user,
-        menuOpen: state.appReducer.menuOpen
+        menuOpen: state.appReducer.menuOpen,
+        onlineStatus: state.appReducer.onlineStatus
     })
 )(Header)

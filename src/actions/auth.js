@@ -6,7 +6,6 @@ export function signInWithEmailAndPassword(email, password){
         auth.signInWithEmailAndPassword(email, password)
         const unsubscribe = auth.onAuthStateChanged(firebaseUser => {
             // Check if user is logged in, then set user email, otherwise set user in Redux to null
-            console.log(firebaseUser)
             if(firebaseUser){
                 dispatch({
                     type: 'USER_CHANGED',
@@ -44,7 +43,6 @@ export function createUserWithEmailAndPassword(name, email, password){
 }
 
 export function setUser(user){
-    console.log(user)
     return {
         type: 'USER_CHANGED',
         data: user
@@ -54,11 +52,25 @@ export function setUser(user){
 export function findUser(email){
     return (dispatch, getState) => {
         getState().appReducer.firebase.database().ref('users').orderByChild('email').equalTo(email).once('value', snap => {
-            dispatch({
-                type: 'USER_FOUND',
-                data: snap.val()[Object.keys(snap.val())[0]]
-            })
+            if(snap.val()){
+                dispatch({
+                    type: 'USER_FOUND',
+                    data: snap.val()[Object.keys(snap.val())[0]]
+                })
+            } else {
+                dispatch({
+                    type: 'USER_FOUND',
+                    data: false
+                })
+            }
         })
+    }
+}
+
+export function resetUserFound(){
+    return {
+        type: 'USER_FOUND',
+        data: undefined
     }
 }
 

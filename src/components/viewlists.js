@@ -6,12 +6,6 @@ import * as GroceryActions from './../actions/groceryactions'
 import AddList from './addlist'
 
 class ViewLists extends Component {
-    componentWillMount(){
-        if(!this.props.user){
-            browserHistory.push('/')
-        }
-        this.props.dispatch(GroceryActions.getLists())
-    }
 
     removeList(key, event){
         event.preventDefault()
@@ -24,7 +18,7 @@ class ViewLists extends Component {
     }
 
     render(){
-        if(this.props.lists){
+        if(this.props.lists.length){
             return(
                 <div>
                     <ul className="listsDisplay">
@@ -41,6 +35,8 @@ class ViewLists extends Component {
                     <AddList />
                 </div>
             )
+        } else if (this.props.loading) {
+            return <span style={{ 'color' : 'rgba(0,0,0,0.4)'}}>Loading your lists</span>
         } else {
             return ''
         }
@@ -50,6 +46,7 @@ class ViewLists extends Component {
 export default connect(
     state => ({
         user: state.appReducer.user,
-        lists: state.contentReducer.groceryLists
+        lists: state.contentReducer.groceryLists,
+        loading: state.contentReducer.loadingLists
     })
 )(ViewLists)

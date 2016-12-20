@@ -22,6 +22,9 @@ class Login extends Component {
             }
             unsubscribe()
         })
+        if(this.props.user){
+            browserHistory.push('/lists')
+        }
     }
 
     toggleCreateAccount(event){
