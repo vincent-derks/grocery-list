@@ -30,6 +30,7 @@ const appReducer = (state = initialState, action) => {
             }
         case 'TOGGLE_ONLINE_STATUS':
             return {
+                ...newState,
                 onlineStatus: action.data
             }
         case 'USER_CHANGED':

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { browserHistory } from 'react-router'
 import * as GroceryActions from './../actions/groceryactions'
 import * as AuthActions from './../actions/auth'
+import * as AppActions from './../actions/app'
 
 import AddGrocery from './addgrocery'
 import ChangeFilter from './changefilter'
@@ -26,6 +27,11 @@ class App extends Component {
                 this.props.dispatch(GroceryActions.getLists())
             }
             this.props.dispatch(AuthActions.setUser(firebaseUser))
+        })
+
+        let connected = this.props.firebase.database().ref('.info/connected')
+        connected.on('value', snap => {
+            this.props.dispatch(AppActions.toggleOnlineStatus(snap.val()))    
         })
 
     }
