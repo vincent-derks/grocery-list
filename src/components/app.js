@@ -4,6 +4,7 @@ import { browserHistory } from 'react-router'
 import * as GroceryActions from './../actions/groceryactions'
 import * as AuthActions from './../actions/auth'
 import * as AppActions from './../actions/app'
+import FastClick from 'fastclick'
 
 import AddGrocery from './addgrocery'
 import ChangeFilter from './changefilter'
@@ -12,6 +13,13 @@ import Header from './header'
 class App extends Component {
 
     componentWillMount(){
+
+        // Enable fastclick
+        if ('addEventListener' in document) {
+            document.addEventListener('DOMContentLoaded', function() {
+                FastClick.attach(document.body);
+            }, false);
+        }
 
         // Disable the preloader
         const preloader = document.getElementById('preloader-wrapper')
