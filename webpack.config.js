@@ -82,13 +82,13 @@ if(prod){
             ],
 
         },
-        plugins: [
-            new HtmlWebpackPlugin({
-                title: 'Grocery app!',
-                template: 'src/index_html.ejs',
-                cache: false
-            })
-        ]
+        // plugins: [
+        //     new HtmlWebpackPlugin({
+        //         title: 'Grocery app!',
+        //         template: 'src/index_html.ejs',
+        //         cache: false
+        //     })
+        // ]
     }
 
 }

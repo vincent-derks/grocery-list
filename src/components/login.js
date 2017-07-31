@@ -37,6 +37,7 @@ class Login extends Component {
             if(!this.props.showCreateAccount){
                 return (
                         <div className="pageContentWrapper">
+                            <img className="loginLogo" src="/images/groceries-logo.svg" alt="Logo" />
                             <LoginForm />
                             <h3>Don't have an account?</h3>
                             <button className="btn btn-success" onClick={this.toggleCreateAccount.bind(this)}>Create an account</button>
@@ -45,6 +46,7 @@ class Login extends Component {
             } else {
                 return (
                     <div className="pageContentWrapper">
+                        <img className="loginLogo" src="/images/groceries-logo.svg" alt="Logo" />
                         <CreateAccount />
                         <h3>Already have an account?</h3>
                         <button className="btn btn-default" onClick={this.toggleCreateAccount.bind(this)}>Go back to login page</button>

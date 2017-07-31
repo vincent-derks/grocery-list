@@ -17,7 +17,7 @@ class AddGrocery extends Component {
             <form className="addGrocery" onSubmit={this.submitGrocery.bind(this)}>
                 <input className="form-control" ref="groceryInput" type="text" placeholder="Add new grocery"/>
                 <input className="form-control" ref="groceryNumberInput" type="number" defaultValue="1" />
-                <button type="submit" className="btn btn-default" value="Add">Add</button>
+                <button type="submit" className="btn btn-default" value="Add"><i className="fa fa-plus" aria-hidden="true"></i></button>
             </form>
         )
     }

@@ -29935,7 +29935,7 @@
 	                _react2.default.createElement(
 	                    'button',
 	                    { type: 'submit', className: 'btn btn-default', value: 'Add' },
-	                    'Add'
+	                    _react2.default.createElement('i', { className: 'fa fa-plus', 'aria-hidden': 'true' })
 	                )
 	            );
 	        }
@@ -30381,6 +30381,7 @@
 	                    return _react2.default.createElement(
 	                        'div',
 	                        { className: 'pageContentWrapper' },
+	                        _react2.default.createElement('img', { className: 'loginLogo', src: '/images/groceries-logo.svg', alt: 'Logo' }),
 	                        _react2.default.createElement(_loginform2.default, null),
 	                        _react2.default.createElement(
 	                            'h3',
@@ -30397,6 +30398,7 @@
 	                    return _react2.default.createElement(
 	                        'div',
 	                        { className: 'pageContentWrapper' },
+	                        _react2.default.createElement('img', { className: 'loginLogo', src: '/images/groceries-logo.svg', alt: 'Logo' }),
 	                        _react2.default.createElement(_createaccount2.default, null),
 	                        _react2.default.createElement(
 	                            'h3',
