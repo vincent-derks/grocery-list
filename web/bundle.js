@@ -29238,12 +29238,12 @@
 	            setTimeout(function () {
 	                preloader.parentNode.removeChild(preloader);
 	            }, 500);
-
 	            if (!this.props.user) {
 	                _reactRouter.browserHistory.push('/');
 	            }
 	            this.props.firebase.auth().onAuthStateChanged(function (firebaseUser) {
 	                if (firebaseUser) {
+	                    _this2.props.dispatch(AuthActions.setUser(firebaseUser));
 	                    _this2.props.dispatch(GroceryActions.getLists());
 	                }
 	                _this2.props.dispatch(AuthActions.setUser(firebaseUser));
@@ -29694,6 +29694,7 @@
 	exports.toggleShowForgotPasswordEmailInput = toggleShowForgotPasswordEmailInput;
 	exports.sendForgotPasswordEmail = sendForgotPasswordEmail;
 	exports.logout = logout;
+	exports.updateProfile = updateProfile;
 
 	var _reactRouter = __webpack_require__(218);
 
@@ -29711,7 +29712,10 @@
 	            } else {
 	                dispatch({
 	                    type: 'USER_CHANGED',
-	                    data: null
+	                    data: {
+	                        user: null,
+	                        dbUser: null
+	                    }
 	                });
 	            }
 	        });
@@ -29739,9 +29743,30 @@
 	}
 
 	function setUser(user) {
-	    return {
-	        type: 'USER_CHANGED',
-	        data: user
+	    if (user) {
+	        var uid = user.uid;
+	        return function (dispatch, getState) {
+	            var DbRef = getState().appReducer.firebase.database();
+	            DbRef.ref('users').child(uid).on('value', function (snap) {
+	                var dbUser = snap.val();
+	                dispatch({
+	                    type: 'USER_CHANGED',
+	                    data: {
+	                        user: user,
+	                        dbUser: dbUser
+	                    }
+	                });
+	            });
+	        };
+	    }
+	    return function (dispatch) {
+	        dispatch({
+	            type: 'USER_CHANGED',
+	            data: {
+	                user: null,
+	                dbUser: null
+	            }
+	        });
 	    };
 	}
 
@@ -29832,6 +29857,22 @@
 	                data: null
 	            });
 	            _reactRouter.browserHistory.push('/');
+	        });
+	    };
+	}
+
+	function updateProfile(userData) {
+	    return function (dispatch, getState) {
+	        var DbRef = getState().appReducer.firebase.database();
+	        DbRef.ref('users').child(getState().appReducer.user.uid).set({
+	            name: userData.name
+	        }, function () {
+	            dispatch({
+	                type: 'UPDATE_USER_PROFILE',
+	                data: {
+	                    name: userData.name
+	                }
+	            });
 	        });
 	    };
 	}
@@ -49458,10 +49499,19 @@
 	var Profile = function (_Component) {
 	    _inherits(Profile, _Component);
 
-	    function Profile() {
+	    function Profile(props) {
 	        _classCallCheck(this, Profile);
 
-	        return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
+
+	        _this.state = {
+	            name: props.dbUser.name
+	        };
+
+	        _this.handleChangeName = _this.handleChangeName.bind(_this);
+	        _this.handleProfileUpdate = _this.handleProfileUpdate.bind(_this);
+
+	        return _this;
 	    }
 
 	    _createClass(Profile, [{
@@ -49478,12 +49528,46 @@
 	            });
 	        }
 	    }, {
+	        key: 'handleChangeName',
+	        value: function handleChangeName(e) {
+	            this.setState({
+	                name: e.target.value
+	            });
+	        }
+	    }, {
+	        key: 'handleProfileUpdate',
+	        value: function handleProfileUpdate(e) {
+	            e.preventDefault();
+	            var userData = {
+	                name: this.state.name
+	            };
+	            this.props.dispatch(AuthActions.updateProfile(userData));
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
-	                'Profile page'
+	                { className: 'profile' },
+	                _react2.default.createElement(
+	                    'form',
+	                    { ref: 'profileForm', className: 'form', onSubmit: this.handleProfileUpdate },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'label',
+	                            { htmlFor: 'name' },
+	                            'Name'
+	                        ),
+	                        _react2.default.createElement('input', { id: 'name', className: 'form-control', type: 'text', value: this.state.name, onChange: this.handleChangeName })
+	                    ),
+	                    _react2.default.createElement(
+	                        'button',
+	                        { className: 'btn btn-primary', type: 'submit' },
+	                        'Save'
+	                    )
+	                )
 	            );
 	        }
 	    }]);
@@ -49493,7 +49577,9 @@
 
 	exports.default = (0, _reactRedux.connect)(function (state) {
 	    return {
-	        firebase: state.appReducer.firebase
+	        firebase: state.appReducer.firebase,
+	        user: state.appReducer.user,
+	        dbUser: state.appReducer.dbUser
 	    };
 	})(Profile);
 
@@ -49585,7 +49671,8 @@
 	            });
 	        case 'USER_CHANGED':
 	            return _extends({}, newState, {
-	                user: action.data
+	                user: action.data.user,
+	                dbUser: action.data.dbUser
 	            });
 	        case 'TOGGLE_CREATE_ACCOUNT':
 	            return _extends({}, newState, {
@@ -49599,6 +49686,12 @@
 	            return _extends({}, newState, {
 	                forgotPasswordEmailSend: !newState.forgotPasswordEmailSend,
 	                forgotPasswordEmailInput: false
+	            });
+	        case 'UPDATE_USER_PROFILE':
+	            return _extends({}, newState, {
+	                dbUser: {
+	                    name: action.data.name
+	                }
 	            });
 	        default:
 	            return newState;

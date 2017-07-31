@@ -14,7 +14,10 @@ export function signInWithEmailAndPassword(email, password){
             } else {
                 dispatch({
                     type: 'USER_CHANGED',
-                    data: null
+                    data: {
+                        user: null,
+                        dbUser: null
+                    }
                 })
             }
         })
@@ -43,9 +46,30 @@ export function createUserWithEmailAndPassword(name, email, password){
 }
 
 export function setUser(user){
-    return {
-        type: 'USER_CHANGED',
-        data: user
+    if(user){
+        const uid = user.uid    
+        return (dispatch, getState) => {
+            const DbRef = getState().appReducer.firebase.database()
+            DbRef.ref('users').child(uid).on('value', snap => {
+                const dbUser = snap.val()
+                dispatch({
+                    type: 'USER_CHANGED',
+                    data: {
+                        user, 
+                        dbUser
+                    }
+                })
+            })
+        }
+    }
+    return (dispatch) => {
+        dispatch({
+            type: 'USER_CHANGED',
+            data: {
+                user: null,
+                dbUser: null
+            }
+        })
     }
 }
 
@@ -137,6 +161,23 @@ export function logout(){
                 data: null
             })
             browserHistory.push('/')
+        })
+    }
+}
+
+
+export function updateProfile(userData){
+    return (dispatch, getState) => {
+        const DbRef = getState().appReducer.firebase.database()
+        DbRef.ref('users').child(getState().appReducer.user.uid).set({
+            name: userData.name
+        }, ()=>{
+            dispatch({
+                type: 'UPDATE_USER_PROFILE',
+                data: {
+                    name: userData.name
+                }
+            })
         })
     }
 }

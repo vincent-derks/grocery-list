@@ -36,7 +36,8 @@ const appReducer = (state = initialState, action) => {
         case 'USER_CHANGED':
             return {
                 ...newState,
-                user: action.data
+                user: action.data.user,
+                dbUser: action.data.dbUser
             }
         case 'TOGGLE_CREATE_ACCOUNT':
             return {
@@ -53,6 +54,13 @@ const appReducer = (state = initialState, action) => {
                 ...newState,
                 forgotPasswordEmailSend: !newState.forgotPasswordEmailSend,
                 forgotPasswordEmailInput: false
+            }
+        case 'UPDATE_USER_PROFILE':
+            return {
+                ...newState,
+                dbUser: {
+                    name: action.data.name
+                }
             }
         default:
             return newState

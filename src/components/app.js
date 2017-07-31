@@ -10,6 +10,7 @@ import ChangeFilter from './changefilter'
 import Header from './header'
 
 class App extends Component {
+
     componentWillMount(){
 
         // Disable the preloader
@@ -18,12 +19,12 @@ class App extends Component {
         setTimeout(()=>{
             preloader.parentNode.removeChild(preloader)
         }, 500)
-
         if(!this.props.user){
             browserHistory.push('/')
         }
         this.props.firebase.auth().onAuthStateChanged(firebaseUser => {
             if(firebaseUser){
+                this.props.dispatch(AuthActions.setUser(firebaseUser))
                 this.props.dispatch(GroceryActions.getLists())
             }
             this.props.dispatch(AuthActions.setUser(firebaseUser))
