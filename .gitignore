@@ -1,6 +1,7 @@
 /node_modules
 .DS_Store
 /web/bundle_*.js
+/web/bundle.js
 /web/index.html
 .bash_history
 .ssh

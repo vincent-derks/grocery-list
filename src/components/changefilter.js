@@ -21,7 +21,7 @@ class ChangeFilter extends Component {
     render(){
         return(
             <div className="filters btn-group btn-group-sm" role="group">
-                <button type="button" className={'btn btn-default all '+this.isActive(undefined)} value="" onClick={this.changeFilter.bind(this)}>All</button>
+                <button type="button" className={'btn btn-default all '+this.isActive('all')} value="" onClick={this.changeFilter.bind(this)}>All</button>
                 <button type="button" className={'btn btn-default open '+this.isActive('open')} value="open" onClick={this.changeFilter.bind(this)}>Open</button>
                 <button type="button" className={'btn btn-default closed '+this.isActive('closed')} value="closed" onClick={this.changeFilter.bind(this)}>Closed</button>
             </div>

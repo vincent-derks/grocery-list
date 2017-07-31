@@ -14,11 +14,22 @@ class Header extends Component {
     }
 
     getPageTitle(){
-        const { page, list } = this.props
+        let { page, list } = this.props
         switch(true){
             case page == '/lists':
                 return 'Your lists'
             case page.indexOf('/list') >= 0:
+                const windowWidth = window.innerWidth
+                let max = 15
+                if(windowWidth <= 500) max = 10
+                if(windowWidth < 375) max = 5
+                if(list.length > max){
+                    list = [...list].map((l,i)=>{
+                        if(i > (max + 3)) return false
+                        if(i > max) return '.'
+                        return l
+                    }).filter(l=>l).join('')
+                }
                 return list
             case page.indexOf('/share') >= 0:
                 return 'Share your list'

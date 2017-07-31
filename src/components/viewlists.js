@@ -26,8 +26,8 @@ class ViewLists extends Component {
                             return (
                                 <li key={item.id}>
                                     <Link to={`/list/${item.slug}`}>{item.name}</Link>
-                                    <button onClick={this.shareList.bind(this, item.id)} className="btn btn-default pull-right"><i className="fa fa-share" aria-hidden="true"></i></button>
-                                    <button onClick={this.removeList.bind(this, item.id)} className="btn btn-danger pull-right"><i className="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button onClick={this.shareList.bind(this, item.id)} className="btn btn-default pull-right share"><i className="fa fa-share" aria-hidden="true"></i></button>
+                                    <button onClick={this.removeList.bind(this, item.id)} className="btn btn-danger pull-right delete"><i className="fa fa-trash" aria-hidden="true"></i></button>
                                 </li>
                             )
                         })}
@@ -38,7 +38,12 @@ class ViewLists extends Component {
         } else if (this.props.loading) {
             return <span style={{ 'color' : 'rgba(0,0,0,0.4)'}}>Loading your lists</span>
         } else {
-            return ''
+            return (
+                <div>
+                    <p style={{padding: '1rem'}}>Sorry, no lists found. Please add a new list</p>
+                    <AddList />
+                </div>
+            )
         }
     }
 }

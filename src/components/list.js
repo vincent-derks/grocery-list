@@ -57,9 +57,9 @@ class List extends Component {
                         {filteredGroceries.map((item)=>{
                             return (
                                 <li key={item.id}>
-                                    <input type="checkbox" checked={item.done} onChange={this.toggleGroceryStatus.bind(this, item.id)}/>
-                                    <div className="text">{item.value} ({item.amount}x)</div>
-                                    <button className="btn btn-danger" onClick={this.removeGrocery.bind(this, item.id)}>Remove</button>
+                                    <input id={"check-item-"+item.id} type="checkbox" checked={item.done} onChange={this.toggleGroceryStatus.bind(this, item.id)}/>
+                                    <label htmlFor={"check-item-"+item.id} className="text">{item.value} ({item.amount}x)</label>
+                                    <button className="btn" onClick={this.removeGrocery.bind(this, item.id)}><i className="fa fa-times" aria-hidden="true"></i></button>
                                 </li>
                             )
                         })}

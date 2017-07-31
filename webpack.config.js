@@ -58,7 +58,7 @@ if(prod){
         entry: './src/index.js',
         output: {
             path: './web/',
-            filename: 'bundle_[hash].js'
+            filename: 'bundle.js'
         },
         module: {
             loaders: [
@@ -85,7 +85,8 @@ if(prod){
         plugins: [
             new HtmlWebpackPlugin({
                 title: 'Grocery app!',
-                template: 'src/index_html.ejs'
+                template: 'src/index_html.ejs',
+                cache: false
             })
         ]
     }

@@ -1,7 +1,7 @@
 const initialState = {
     groceryLists: [],
     singleList: [],
-    filter: null,
+    filter: 'all',
     loadingLists: false
 }
 
