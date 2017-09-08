@@ -4,6 +4,12 @@ export function toggleMenu(){
     }
 }
 
+export function toggleAddList(){
+    return {
+        type: 'TOGGLE_ADD_LIST'
+    }
+}
+
 let timeOutRunning = false
 let setTimeoutForOnlineStatus = (status) => {
     timeOutRunning = true

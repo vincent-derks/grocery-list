@@ -19,8 +19,11 @@ class ViewLists extends Component {
 
     render(){
         if(this.props.lists.length){
+            const username = this.props.dbUser ? this.props.dbUser.name : 'mysterious'
             return(
                 <div>
+                    <h3>Hey there {username}</h3>
+                    <p>Here are your lists</p>
                     <ul className="listsDisplay">
                         {this.props.lists.map( item => {
                             return (
@@ -50,6 +53,7 @@ class ViewLists extends Component {
 
 export default connect(
     state => ({
+        dbUser: state.appReducer.dbUser,
         user: state.appReducer.user,
         lists: state.contentReducer.groceryLists,
         loading: state.contentReducer.loadingLists

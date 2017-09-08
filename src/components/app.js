@@ -8,7 +8,7 @@ import FastClick from 'fastclick'
 
 import AddGrocery from './addgrocery'
 import ChangeFilter from './changefilter'
-import Header from './header'
+import FooterNav from './footernav'
 
 class App extends Component {
 
@@ -48,15 +48,16 @@ class App extends Component {
         if(this.props.user === undefined){
             return (
                 <div className="wrapper">
-                    <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
+                    {/* <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/> */}
                     <span style={{ 'color' : 'rgba(0,0,0,0.4)'}}>Loading user data...</span>
                 </div>
             )
         } else {
             return (
                 <div className="wrapper">
-                    <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/>
+                    {/* <Header page={this.props.location.pathname} list={this.props.params.list} share={this.props.params.listId}/> */}
                     {this.props.children}
+                    <FooterNav />
                 </div>
             )
         }

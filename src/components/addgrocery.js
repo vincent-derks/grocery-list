@@ -7,6 +7,7 @@ class AddGrocery extends Component {
     submitGrocery(event){
         event.preventDefault()
         const value = this.refs.groceryInput.value
+        if(!value) return 
         const amount = this.refs.groceryNumberInput.value
         this.props.dispatch(Actions.addGrocery(value, amount))
         this.refs.groceryInput.value = ''

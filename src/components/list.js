@@ -38,6 +38,12 @@ class List extends Component {
         })
     }
 
+    getPageTitle(){
+        const { lists, groceries } = this.props
+        if(groceries.length < 1) return undefined
+        return lists.filter(list => list.id == groceries.id)[0].name
+    }
+
     componentWillMount(){
         if(!this.props.user){
             browserHistory.push('/')
@@ -77,8 +83,10 @@ class List extends Component {
     }
 
     render(){
+        const pageTitle = this.getPageTitle()
         return (
             <div className="groceryListWrapper">
+                <h3>{pageTitle ? pageTitle : ''}</h3>
                 {this.renderList()}
                 <AddGrocery />
             </div>
@@ -89,6 +97,7 @@ class List extends Component {
 export default connect(
     (state, ownProps) => ({
         groceries: state.contentReducer.singleList,
+        lists: state.contentReducer.groceryLists,
         filter: state.contentReducer.filter,
         user: state.appReducer.user
     })

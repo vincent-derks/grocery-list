@@ -12,6 +12,7 @@ const Ref = firebase.initializeApp(config)
 
 const initialState = {
     menuOpen: false,
+    addListOpen: false,
     onlineStatus: true,
     firebase: Ref,
     user: undefined,
@@ -27,6 +28,11 @@ const appReducer = (state = initialState, action) => {
             return {
                 ...newState,
                 menuOpen: !newState.menuOpen
+            }
+        case 'TOGGLE_ADD_LIST':
+            return {
+                ...newState,
+                addListOpen: !newState.addListOpen
             }
         case 'TOGGLE_ONLINE_STATUS':
             return {
