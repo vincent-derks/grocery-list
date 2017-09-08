@@ -6,6 +6,7 @@ import * as Actions from './../actions/groceryactions'
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import AddGrocery from './addgrocery'
+import ChangeFilter from './changefilter'
 
 class List extends Component {
 
@@ -86,6 +87,9 @@ class List extends Component {
         const pageTitle = this.getPageTitle()
         return (
             <div className="groceryListWrapper">
+                <div className="filterWrapper">
+                    <ChangeFilter />
+                </div>
                 <h3>{pageTitle ? pageTitle : ''}</h3>
                 {this.renderList()}
                 <AddGrocery />
